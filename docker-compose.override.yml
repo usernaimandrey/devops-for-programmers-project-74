@@ -1,0 +1,10 @@
+---
+version: '3.2'
+services:
+  webapp:
+    extends:
+      file: docker-compose.yml
+      service: app
+    command: npm run dev
+    ports:
+      - 8080:8080

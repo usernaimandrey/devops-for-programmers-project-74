@@ -1,3 +1,5 @@
+include make-compose.mk
+
 image = node:14.18.1
 
 app-node:
