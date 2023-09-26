@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  APP_IMAGE_NAME: hexletbasics/services-app
+  APP_IMAGE_NAME: shlyapnikovan/devops-for-programmers-project-74
 
 jobs:
   build:
