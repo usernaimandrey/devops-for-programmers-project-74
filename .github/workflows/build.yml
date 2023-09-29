@@ -33,4 +33,7 @@ jobs:
           tags: ${{ env.APP_IMAGE_NAME }}
 
       - name: Check
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
         run: make compose
