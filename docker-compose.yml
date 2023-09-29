@@ -4,10 +4,11 @@ services:
   db:
     image: postgres:16
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_HOST: 127.0.0.1
     volumes:
-      - pgdata:/var/lib/postgresql/data  
+      - pgdata:/var/lib/postgresql/data
 
   app:
     image: shlyapnikovan/devops-for-programmers-project-74
