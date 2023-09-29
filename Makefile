@@ -6,7 +6,8 @@ app-node:
 	docker run -it -u $$(id -u $${USER}):$$(id -g $${USER})  -w /root -v `pwd`/app:/root $(P) $(image) $(T)
 
 install:
-	 make app-node T='make setup'
+	cp -n .env.example .env || true
+	make app-node T='make setup'
 
 
 start:

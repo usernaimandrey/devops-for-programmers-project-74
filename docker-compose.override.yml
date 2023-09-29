@@ -8,18 +8,27 @@ services:
     # extends:
     #   file: docker-compose.yml
     #   service: app
-    command: npm run dev
+    command: bash -c 'sleep 3 && npm start'
     volumes:
       - ./app:/app
+    env_file: .env
     # ports:
       # - 8080:8080
+    depends_on:
+      - db
 
-  webserver:
+  caddy:
     image: caddy:2.6
     ports:
       - "443:443"
       - "80:80"
     volumes:
       - "./services/caddy/Caddyfile:/etc/caddy/Caddyfile"
+      - caddy_data:/data
+      - caddy_config:/config
     depends_on:
       - app
+
+volumes:
+  caddy_data:
+  caddy_config:
