@@ -33,4 +33,4 @@ jobs:
           tags: ${{ env.APP_IMAGE_NAME }}
 
       - name: Check
-        run: make compose
+        run: make compose-test

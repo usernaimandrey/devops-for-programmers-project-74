@@ -1,23 +1,24 @@
+compose-start:
+	docker-compose up --abort-on-container-exit
+
 compose-test:
-	docker compose --file docker-compose.yml up --abort-on-container-exit --exit-code-from app
+	docker-compose -f docker-compose.yml up --abort-on-container-exit --exit-code-from app
+
+compose-setup: compose-build compose-install
 
 compose-install:
-	docker compose  run -u $$(id -u ${USER}):$$(id -g ${USER}) --rm app npm ci
-
-compose-run:
-	docker compose up -d
-
-compose-stop:
-	docker compose stop || true
+	docker-compose run --rm app npm install
 
 compose-build:
-	docker compose --file docker-compose.yml build app
+	docker-compose build
 
-compose-push:
-	docker-compose -f docker-compose.yml push app
+compose-bash:
+	docker-compose run --rm app bash
 
 prepare-env:
-	cp -n .env.example .env || true
+	cp -n .env.example .env
 
-compose-setup: prepare-env compose-build compose-test
+compose-production-build:
+	docker-compose -f docker-compose.yml build
 
+ci: prepare-env compose-production-build compose-test
