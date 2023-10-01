@@ -2,11 +2,11 @@
 version: '3.2'
 services:
   db:
-    image: postgres:16
+    image: postgres:16.0-alpine
     environment:
-      DATABASE_USERNAME: postgres
-      DATABASE_PASSWORD: postgres
-      DATABASE_HOST: 127.0.0.1
+      POSTGRES_PASSWORD: "${DATABASE_PASSWORD}"
+      POSTGRES_USER: "${DATABASE_USERNAME}"
+      POSTGRES_DB: "${DATABASE_NAME}"
     volumes:
       - pgdata:/var/lib/postgresql/data
 
@@ -15,6 +15,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.production
+    environment:
+      DATABASE_HOST: db
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_NAME: postgres
     command: npm test
     depends_on: 
       - db

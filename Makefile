@@ -1,15 +1,23 @@
-include make-compose.mk
+compose-test:
+	docker compose --file docker-compose.yml up --abort-on-container-exit --exit-code-from app
 
-image = node:14.18.1
+compose-install:
+	docker compose  run -u $$(id -u ${USER}):$$(id -g ${USER}) --rm app npm ci
 
-app-node:
-	docker run -it -u $$(id -u $${USER}):$$(id -g $${USER})  -w /root -v `pwd`/app:/root $(P) $(image) $(T)
+compose-run:
+	docker compose up -d
 
-install:
+compose-stop:
+	docker compose stop || true
+
+compose-build:
+	docker compose --file docker-compose.yml build app
+
+compose-push:
+	docker-compose -f docker-compose.yml push app
+
+prepare-env:
 	cp -n .env.example .env || true
-	make app-node T='make setup'
 
-
-start:
-	make app-node P='-p 8080:8080' T='make dev'
+compose-setup: prepare-env compose-build compose-test
 
