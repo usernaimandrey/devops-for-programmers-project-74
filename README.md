@@ -3,3 +3,24 @@
 
 ### Bild app
 [![push](https://github.com/usernaimandrey/devops-for-programmers-project-74/actions/workflows/build.yml/badge.svg)](https://github.com/usernaimandrey/devops-for-programmers-project-74/actions/workflows/build.yml)
+
+
+Setup app:
+```bash
+make compose-install
+```
+
+Build image:
+```bash
+make compose-build
+```
+
+Run app:
+ ```bash
+ make compose-start
+ ```
+
+Run test:
+```bash
+make test
+```
