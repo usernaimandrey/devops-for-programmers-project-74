@@ -22,3 +22,5 @@ compose-production-build:
 	docker-compose -f docker-compose.yml build
 
 ci: prepare-env compose-production-build compose-test
+
+test: prepare-env compose-test
